@@ -1,0 +1,185 @@
+/* =========================
+   RESET Y GENERAL
+   ========================= */
+body {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #222;
+  font-family: Arial, sans-serif;
+  overflow: hidden;
+}
+
+/* BARRA SUPERIOR */
+.top-bar {
+  width: 100%;
+  height: 100px;
+  background-color: #ffd829;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  box-sizing: border-box;
+}
+.top-bar .iconos {
+  display: flex;
+  gap: 40px;
+  flex: 1;
+}
+.top-bar .iconos .icon {
+  text-decoration: none;
+  font-size: 24px;
+  color: #000;
+}
+.top-bar .logo img {
+  height: 80px;
+}
+
+/* CONTENEDOR PRINCIPAL */
+.main-container {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+/* PANEL BOTONES */
+.panel-cuadrados {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.cuadro {
+  width: 60px;
+  height: 60px;
+  background-color: #ffd829;
+  border: 5px solid #fff;
+  border-radius: 5px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  overflow: hidden;
+}
+.cuadro img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* CARRETERA Y COCHE */
+.carretera-container {
+  position: relative;
+  width: 1200px;
+  height: 750px;
+  overflow: hidden;
+  border-radius: 10px;
+}
+.carretera {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 180%;
+  height: 100%;
+  z-index: 1;
+}
+.carretera img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+}
+.carretera img.active {
+  opacity: 1;
+}
+.interior {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  pointer-events: none;
+}
+
+/* =========================
+   EFECTOS VISUALES
+   ========================= */
+/* Alcohol */
+.blur {
+  filter: blur(20px);
+}
+
+/* Fumar: overlay color + nubes dentro del coche */
+.humo-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(4px) brightness(150%) contrast(190%);
+  z-index: 9;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+.humo-nube {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  background: rgba(255,255,255,0.6);
+  border-radius: 50%;
+  filter: blur(12px);
+  pointer-events: none;
+  z-index: 11;
+  animation: subirHumo 5s linear forwards;
+}
+@keyframes subirHumo {
+  0% { bottom: 0; transform: translateX(0); opacity: 1; }
+  50% { transform: translateX(20px); }
+  100% { bottom: 700px; transform: translateX(-10px); opacity:0; }
+}
+
+/* Móvil */
+.movil-nube {
+  position: absolute;
+  font-size: 40px;
+  z-index: 15;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.movil-nube button {
+  margin-top: 5px;
+  cursor: pointer;
+  background: #ff4444;
+  color: white;
+  border: none;
+  border-radius: 3px;
+  padding: 2px 5px;
+}
+
+/* Sueño: parpadeo lento negro */
+.sueno-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  opacity: 0;
+  z-index: 20;
+  pointer-events: none;
+  animation: none;
+}
+@keyframes parpadeo-lento {
+  0% { opacity: 0; }
+  50% { opacity: 0.9; }
+  100% { opacity: 0; }
+}

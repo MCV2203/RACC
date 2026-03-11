@@ -1,0 +1,186 @@
+body {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #222;
+  font-family: Arial, sans-serif;
+  overflow: hidden;
+}
+
+.top-bar {
+  width: 100%;
+  height: 100px;
+  background-color: #ffd829;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  box-sizing: border-box;
+}
+
+.top-bar .iconos {
+  display: flex;
+  gap: 40px;
+  justify-content: flex-start;
+  flex: 1;
+}
+
+.top-bar .iconos .icon {
+  text-decoration: none;
+  font-size: 24px;
+  color: #000;
+  cursor: pointer;
+}
+
+.top-bar .logo img {
+  height: 80px;
+  width: auto;
+}
+
+.carretera-container {
+  position: relative;
+  width: 1200px;
+  height: 750px;
+  margin-top: 20px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.carretera {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 180%;
+  height: 100%;
+}
+
+.carretera img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.carretera img.active {
+  opacity: 1;
+}
+
+.interior {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+}
+
+.main-container {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.panel-cuadrados {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.cuadro {
+  width: 60px;
+  height: 60px;
+  background-color: #ffd829;
+  border: 5px solid #ffffff;
+  border-radius: 5px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  user-select: none;
+  overflow: hidden;
+  transition: border-color 0.3s ease;
+}
+
+.cuadro img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  pointer-events: none;
+}
+
+.cuadro:hover {
+  background-color: #ffec66;
+}
+
+/* Efectos visuales */
+.carretera.blur {
+  filter: blur(7px);
+}
+
+.carretera.humo {
+  filter: blur(4px) brightness(150%) contrast(190%);
+}
+
+/* Humo */
+.humo-nube {
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: rgba(200, 200, 200, 0.5);
+}
+
+/* Sueño parpadeo */
+@keyframes parpadeo {
+  0%,100% { opacity: 0; }
+  50% { opacity: 1; }
+}
+.carretera.sueno::after {
+  content:"";
+  position:absolute;
+  top:0; left:0;
+  width:100%; height:100%;
+  background-color:black;
+  opacity:0;
+  pointer-events:none;
+  animation: parpadeo 1.5s 2; /* 2 parpadeos */
+  z-index:10;
+}
+
+/* Móviles con botón */
+.movil-nube {
+  position: absolute;
+  width: 60px;
+  height: 120px;
+  background-color: rgba(0,0,0,0.8);
+  border: 3px solid #fff;
+  border-radius: 10px;
+  z-index: 20;
+  pointer-events: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  color: white;
+  font-size: 24px;
+}
+
+.movil-nube button {
+  margin-top: 10px;
+  width: 20px;
+  height: 20px;
+  background-color: red;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  pointer-events: auto;
+}
