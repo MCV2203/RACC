@@ -6,7 +6,7 @@ const contenedor = document.querySelector('.carretera-container');
 const boton1 = document.getElementById('cuadro1'); // alcohol
 const boton2 = document.getElementById('cuadro2'); // fumar
 const boton3 = document.getElementById('cuadro3'); // sueño
-const boton4 = document.getElementById('cuadro4'); // móvil
+const boton4 = document.getElementById('cuadro4'); // teléfono
 
 // OVERLAYS
 const overlaySueno = document.createElement('div');
@@ -62,10 +62,7 @@ boton3.addEventListener('click', () => {
     overlaySueno.style.opacity = 0;
   }
 });
-boton4.addEventListener('click', () => {
-  efectos.movil = !efectos.movil;
-  if(efectos.movil) crearMovilesAleatorios();
-});
+boton4.addEventListener('click', crearTelefono); // teléfono desbloqueable
 
 // FUNCIONES EFECTOS
 function crearHumo() {
@@ -86,20 +83,54 @@ function crearHumo() {
   },5000);
 }
 
-function crearMovilesAleatorios() {
-  const cantidad = 4 + Math.floor(Math.random()*2);
-  for(let i=0;i<cantidad;i++){
-    const movil = document.createElement('div');
-    movil.classList.add('movil-nube');
-    movil.style.left = Math.random()*1100+'px';
-    movil.style.top = Math.random()*500+'px';
-    movil.textContent='📱';
-    const boton = document.createElement('button');
-    boton.textContent='X';
-    boton.addEventListener('click',()=>movil.remove());
-    movil.appendChild(boton);
-    contenedor.appendChild(movil);
-  }
+// NUEVO TELEFONO DESBLOQUEABLE
+function crearTelefono() {
+  if(document.querySelector('.telefono-racc')) return;
+
+  efectos.movil = true;
+  const telefono = document.createElement('div');
+  telefono.classList.add('telefono-racc');
+  telefono.style.left = '850px';
+  telefono.style.top = '100px';
+
+  telefono.innerHTML = `
+    <div class="pantalla1-racc">
+      <p><strong>Introduce Contraseña - RACC</strong></p>
+      <div class="entrada">
+        <input type="password" class="clave-racc" placeholder="Contraseña" />
+        <button class="btn-comprobar">↵</button>
+      </div>
+      <p class="error mensaje-racc"></p>
+    </div>
+    <div class="pantalla2-racc">
+      <h2>🔓 Desbloqueado</h2>
+      <p>Bienvenido</p>
+      <button class="btn-quitar">❌ Quitar Teléfono</button>
+    </div>
+  `;
+
+  const pantalla1 = telefono.querySelector(".pantalla1-racc");
+  const pantalla2 = telefono.querySelector(".pantalla2-racc");
+  const input = telefono.querySelector(".clave-racc");
+  const mensaje = telefono.querySelector(".mensaje-racc");
+  const btnComprobar = telefono.querySelector(".btn-comprobar");
+  const btnQuitar = telefono.querySelector(".btn-quitar");
+
+  btnComprobar.addEventListener("click", ()=>{
+    if(input.value === "RACC"){
+      pantalla1.style.display = "none";
+      pantalla2.style.display = "flex";
+    } else {
+      mensaje.innerText = "❌ Contraseña incorrecta";
+    }
+  });
+
+  btnQuitar.addEventListener("click", ()=>{
+    telefono.remove();
+    efectos.movil = false;
+  });
+
+  contenedor.appendChild(telefono);
 }
 
 // GAME LOOP
