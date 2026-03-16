@@ -44,6 +44,7 @@ document.addEventListener("keydown", (e) => {
   if (e.key === "ArrowLeft") moveLeft = true;
   if (e.key === "ArrowRight") moveRight = true;
 });
+
 document.addEventListener("keyup", (e) => {
   if (e.key === "ArrowLeft") moveLeft = false;
   if (e.key === "ArrowRight") moveRight = false;
@@ -73,26 +74,59 @@ function crearHumo() {
 }
 
 // ===============================
-// MÓVILES CON BOTÓN (solo desaparecen manualmente)
+// UN SOLO TELÉFONO A LA DERECHA
 // ===============================
-function crearMovilesAleatorios() {
-  const cantidad = 4 + Math.floor(Math.random() * 2); // 4 o 5
-  for (let i = 0; i < cantidad; i++) {
-    const movil = document.createElement("div");
-    movil.classList.add("movil-nube");
-    movil.style.left = Math.random() * 1100 + "px";
-    movil.style.top = Math.random() * 500 + "px";
-    movil.textContent = "📱";
+function crearTelefonoDerecha() {
+  // Evita que aparezcan varios
+  if (document.querySelector(".telefono-racc")) return;
 
-    const boton = document.createElement("button");
-    boton.addEventListener("click", () => movil.remove());
-    movil.appendChild(boton);
+  const telefono = document.createElement("div");
+  telefono.classList.add("telefono-racc");
 
-    contenedor.appendChild(movil);
+  // Posición fija a la derecha dentro del coche
+  telefono.style.left = "850px";
+  telefono.style.top = "100px";
 
-    // ❌ Eliminamos la eliminación automática
-    // setTimeout(()=> movil.remove(), 4000);
-  }
+  telefono.innerHTML = `
+    <div class="pantalla1-racc">
+      <p><strong>Introduce Contraseña - RACC</strong></p>
+      <div class="entrada">
+        <input type="password" class="clave-racc" placeholder="Contraseña" />
+        <button class="btn-comprobar">↵</button>
+      </div>
+      <p class="error mensaje-racc"></p>
+    </div>
+
+    <div class="pantalla2-racc">
+      <h2>🔓 Desbloqueado</h2>
+      <p>Bienvenido</p>
+      <button class="btn-quitar">❌ Quitar Teléfono</button>
+    </div>
+  `;
+
+  const pantalla1 = telefono.querySelector(".pantalla1-racc");
+  const pantalla2 = telefono.querySelector(".pantalla2-racc");
+  const input = telefono.querySelector(".clave-racc");
+  const mensaje = telefono.querySelector(".mensaje-racc");
+  const btnComprobar = telefono.querySelector(".btn-comprobar");
+  const btnQuitar = telefono.querySelector(".btn-quitar");
+
+  btnComprobar.addEventListener("click", () => {
+    const contraseña = input.value;
+
+    if (contraseña === "RACC") {
+      pantalla1.style.display = "none";
+      pantalla2.style.display = "flex";
+    } else {
+      mensaje.innerText = "❌ Contraseña incorrecta";
+    }
+  });
+
+  btnQuitar.addEventListener("click", () => {
+    telefono.remove();
+  });
+
+  contenedor.appendChild(telefono);
 }
 
 // ===============================
@@ -144,13 +178,13 @@ function activarEfectoAleatorioCadena() {
   const elegido = lista[Math.floor(Math.random() * lista.length)];
   efectos[elegido] = true;
 
-  if (elegido === "movil") crearMovilesAleatorios();
+  if (elegido === "movil") crearTelefonoDerecha();
 
   const duracion = elegido === "sueno" ? 2000 : 5000;
 
   setTimeout(() => {
     efectos[elegido] = false;
-    setTimeout(activarEfectoAleatorioCadena, 1000); // respiro 1s
+    setTimeout(activarEfectoAleatorioCadena, 1000);
   }, duracion);
 }
 

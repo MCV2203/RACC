@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mobil prueba</title>
+
+    <style>
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: grey;
+        margin: 0;
+      }
+
+      .telefono {
+        height: 500px;
+        width: 250px;
+        border: 10px solid black;
+        border-radius: 30px;
+        padding: 30px;
+        background-image: url("fondo.avif");
+        background-size: cover;
+        background-position: center;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+      }
+
+      p {
+        font-size: 20px;
+        text-align: center;
+      }
+
+      .entrada {
+        display: flex;
+        gap: 10px;
+        margin-top: 10px;
+      }
+
+      input {
+        padding: 10px;
+        border-radius: 10px;
+        border: 1px solid black;
+        flex: 1;
+      }
+
+      button {
+        padding: 10px 15px;
+        border-radius: 10px;
+        border: none;
+        background-color: black;
+        color: white;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background-color: darkgrey;
+      }
+
+      .error {
+        color: red;
+        margin-top: 10px;
+      }
+
+      #pantalla2 {
+        display: none;
+        text-align: center;
+        flex-direction: column;
+        gap: 10px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="telefono" id="telefono">
+      <!-- Pantalla de desbloqueo -->
+      <div id="pantalla1">
+        <p><strong>Introduce Contraseña - RACC</strong></p>
+
+        <div class="entrada">
+          <input type="password" id="clave" placeholder="Contraseña" />
+          <button onclick="comprobar()">↵</button>
+        </div>
+
+        <p class="error" id="mensaje"></p>
+      </div>
+
+      <!-- Pantalla desbloqueada -->
+      <div id="pantalla2">
+        <h2>🔓 Desbloqueado</h2>
+        <p>Bienvenido</p>
+        <button onclick="quitarTelefono()">❌ Quitar Teléfono</button>
+      </div>
+    </div>
+
+    <script>
+      function comprobar() {
+        let contraseña = document.getElementById("clave").value;
+
+        if (contraseña == "racc") {
+          document.getElementById("pantalla1").style.display = "none";
+          document.getElementById("pantalla2").style.display = "flex";
+        } else {
+          document.getElementById("mensaje").innerText =
+            "❌ Contraseña incorrecta";
+        }
+      }
+
+      // Función para hacer desaparecer el teléfono
+      function quitarTelefono() {
+        document.getElementById("telefono").style.display = "none";
+      }
+    </script>
+  </body>
+</html>
