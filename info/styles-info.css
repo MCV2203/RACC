@@ -9,6 +9,12 @@
   --radius: 22px;
 }
 
+img {
+    width: 370px;
+    height: 250px;
+    object-fit: cover;
+}
+
 * {
   box-sizing: border-box;
 }

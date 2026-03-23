@@ -204,25 +204,19 @@ function perder() {
 
   // Mostrar overlay con estilo del juego
   overlayGameOver.innerHTML = `
-    <h1 style="
-      color: #000; 
-      background-color: #ffd829; 
-      padding: 20px 40px; 
-      border-radius: 10px;
-      font-family: Garamond, serif;
-      text-align: center;
-      ">HAS PERDIDO</h1>
-    <button id="reiniciar-btn" style="
-      margin-top:30px;
-      padding:15px 30px;
-      font-size:30px;
-      font-family: Garamond, serif;
-      background-color: #ffd829;
-      color: #000;
-      border: none;
-      border-radius: 10px;
-      cursor: pointer;
-      ">VOLVER A EMPEZAR</button>
+    <h1 style="color: #ffd829; background-color: #000000; padding:
+20px 40px; margin-bottom: 0; border: 3px solid #ffd829; border-radius:
+10px; font-family: Garamond, serif; text-align: center;">HAS
+PERDIDO</h1>
+    <p style="color: #ffd829; background-color: #000000; padding: 20px
+40px; margin-bottom: 0; margin-top: 10px; margin-left: 30px;
+margin-right: 30px; border: 3px solid #ffd829; border-radius: 10px;
+font-family: Garamond, serif; text-align: center;">Cada distracción
+tiene un precio… conduce con cuidado.</p>
+    <button id="reiniciar-btn" style="margin-top:30px; padding:15px
+30px; font-size:30px; font-family: Garamond, serif; background-color:
+#ffd829; color: #000; border: 3px solid black; border-radius: 10px;
+cursor: pointer;">VOLVER A EMPEZAR</button>
   `;
   overlayGameOver.style.display = 'flex';
 

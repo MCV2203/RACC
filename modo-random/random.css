@@ -23,25 +23,25 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 40px; /* separación interna */
+  padding: 0 40px;
   box-sizing: border-box;
-  font-family: Garamond, serif; /* tipografía del header */
+  font-family: Garamond, serif;
 }
 
 .top-bar .logo img {
-  height: 80px; /* tamaño del logo */
-  width: auto;  /* mantener proporción */
+  height: 80px;
+  width: auto;
 }
 
 .top-bar .iconos {
   display: flex;
-  gap: 40px; /* separación entre los iconos */
+  gap: 40px;
 }
 
 .top-bar .iconos .icon {
   text-decoration: none;
-  font-size: 24px; /* tamaño de letra */
-  color: #000;     /* color de texto */
+  font-size: 24px;
+  color: #000;
   cursor: pointer;
 }
 
@@ -129,6 +129,7 @@ body {
   height: 100%;
   object-fit: cover;
   pointer-events: none;
+  z-index: 20;
 }
 
 /* =========================
@@ -151,14 +152,10 @@ body {
   background: rgba(255,255,255,0.6);
 }
 
-/* Sueño parpadeo */
-@keyframes parpadeo {
-  0%,100% { opacity: 0; }
-  50% { opacity: 1; }
-}
-
-.carretera.sueno::after {
-  content: "";
+/* =========================
+   SUEÑO GLOBAL
+   ========================= */
+.sueno-overlay {
   position: absolute;
   top: 0;
   left: 0;
@@ -166,11 +163,16 @@ body {
   height: 100%;
   background-color: black;
   opacity: 0;
+  z-index: 21; /* entre carretera y coche/abuela */
   pointer-events: none;
-  animation: parpadeo 1.5s 2;
-  z-index: 20;
+  transition: opacity 0.3s ease-in-out;
+  animation: parpadeo-lento 3s ease-in-out infinite;
 }
 
+@keyframes parpadeo-lento {
+  0%, 100% { opacity: 0; }
+  50% { opacity: 0.7; } /* oscurece un 70% */
+}
 /* =========================
    NUEVO TELÉFONO DESBLOQUEABLE
    ========================= */
@@ -242,4 +244,26 @@ body {
   text-align: center;
   flex-direction: column;
   gap: 10px;
+}
+
+/* =========================
+   OBSTÁCULO ABUELA
+   ========================= */
+.obstaculo {
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  background-image: url("../images/abuela.png");
+  background-size: cover;
+  background-position: center;
+  top: -100px;
+  left: 400px;
+  z-index: 8;
+}
+
+/* HITBOX DEL COCHE */
+#coche-hitbox {
+  position: absolute;
+  z-index: 12;
+  pointer-events: none;
 }
