@@ -1,4 +1,6 @@
-// ELEMENTOS
+// =========================
+// ELEMENTOS Y VARIABLES
+// =========================
 const imgs = document.querySelectorAll('.carretera img');
 const carretera = document.querySelector('.carretera');
 const contenedor = document.querySelector('.carretera-container');
@@ -17,22 +19,37 @@ const overlayHumo = document.createElement('div');
 overlayHumo.classList.add('humo-overlay');
 contenedor.appendChild(overlayHumo);
 
-// VARIABLES
+// OVERLAY GAME OVER
+const overlayGameOver = document.createElement('div');
+overlayGameOver.classList.add('gameover-overlay');
+overlayGameOver.style.position = 'absolute';
+overlayGameOver.style.top = 0;
+overlayGameOver.style.left = 0;
+overlayGameOver.style.width = '100%';
+overlayGameOver.style.height = '100%';
+overlayGameOver.style.backgroundColor = 'rgba(0,0,0,0.8)';
+overlayGameOver.style.display = 'flex';
+overlayGameOver.style.flexDirection = 'column';
+overlayGameOver.style.justifyContent = 'center';
+overlayGameOver.style.alignItems = 'center';
+overlayGameOver.style.color = '#000';
+overlayGameOver.style.fontFamily = 'Arial, sans-serif';
+overlayGameOver.style.fontSize = '60px';
+overlayGameOver.style.zIndex = 100;
+overlayGameOver.style.display = 'none';
+contenedor.appendChild(overlayGameOver);
+
+let gameOver = false;
+
+// =========================
+// SLIDESHOW DE FONDO
+// =========================
 let index = 0;
 let offsetX = 0;
 let speed = 5;
 let moveLeft = false;
 let moveRight = false;
-let controlesInvertidos = false;
 
-const efectos = {
-  alcohol: false,
-  fumar: false,
-  sueno: false,
-  movil: false
-};
-
-// SLIDESHOW
 function mostrarSiguiente() {
   imgs.forEach(img => img.classList.remove('active'));
   imgs[index].classList.add('active');
@@ -40,7 +57,9 @@ function mostrarSiguiente() {
 }
 setInterval(mostrarSiguiente, 130);
 
+// =========================
 // TECLADO
+// =========================
 document.addEventListener('keydown', e => {
   if(e.key==='ArrowLeft') moveLeft=true;
   if(e.key==='ArrowRight') moveRight=true;
@@ -50,21 +69,28 @@ document.addEventListener('keyup', e => {
   if(e.key==='ArrowRight') moveRight=false;
 });
 
-// BOTONES
+// =========================
+// BOTONES EFECTOS
+// =========================
+const efectos = {
+  alcohol: false,
+  fumar: false,
+  sueno: false,
+  movil: false
+};
+
 boton1.addEventListener('click', () => efectos.alcohol = !efectos.alcohol);
 boton2.addEventListener('click', () => efectos.fumar = !efectos.fumar);
 boton3.addEventListener('click', () => {
   efectos.sueno = !efectos.sueno;
-  if(efectos.sueno){
-    overlaySueno.style.animation = 'parpadeo-lento 3s ease-in-out infinite';
-  } else {
-    overlaySueno.style.animation = 'none';
-    overlaySueno.style.opacity = 0;
-  }
+  overlaySueno.style.animation = efectos.sueno ? 'parpadeo-lento 3s ease-in-out infinite' : 'none';
+  overlaySueno.style.opacity = efectos.sueno ? 1 : 0;
 });
-boton4.addEventListener('click', crearTelefono); // teléfono desbloqueable
+boton4.addEventListener('click', crearTelefono);
 
+// =========================
 // FUNCIONES EFECTOS
+// =========================
 function crearHumo() {
   if(!efectos.fumar) {
     overlayHumo.style.opacity = 0;
@@ -83,11 +109,10 @@ function crearHumo() {
   },5000);
 }
 
-// NUEVO TELEFONO DESBLOQUEABLE
 function crearTelefono() {
   if(document.querySelector('.telefono-racc')) return;
-
   efectos.movil = true;
+
   const telefono = document.createElement('div');
   telefono.classList.add('telefono-racc');
   telefono.style.left = '850px';
@@ -133,26 +158,124 @@ function crearTelefono() {
   contenedor.appendChild(telefono);
 }
 
+// =========================
+// COCHE (Fijo) + Hitbox más ancha
+// =========================
+const cocheHitbox = document.createElement("div");
+cocheHitbox.id = "coche-hitbox";
+contenedor.appendChild(cocheHitbox);
+
+const cocheWidth = 250; 
+const cocheHeight = 150;
+
+cocheHitbox.style.width = cocheWidth + "px";
+cocheHitbox.style.height = cocheHeight + "px";
+cocheHitbox.style.position = "absolute";
+cocheHitbox.style.top = contenedor.offsetHeight - cocheHeight - 30 + "px";
+cocheHitbox.style.left = contenedor.offsetWidth/2 - cocheWidth/2 + "px";
+
+// =========================
+// OBSTÁCULO desde horizonte
+// =========================
+const obstaculo = document.createElement("div");
+obstaculo.classList.add("obstaculo");
+contenedor.appendChild(obstaculo);
+
+let obstaculoY = contenedor.offsetHeight * 0.33;
+let obstaculoX = Math.random()*(contenedor.offsetWidth-80);
+
+// =========================
+// COLISIÓN
+// =========================
+function checkCollision(a, b) {
+  const r1 = a.getBoundingClientRect();
+  const r2 = b.getBoundingClientRect();
+  return (
+    r1.left < r2.right &&
+    r1.right > r2.left &&
+    r1.top < r2.bottom &&
+    r1.bottom > r2.top
+  );
+}
+
+function perder() {
+  if(gameOver) return;
+  gameOver = true;
+
+  // Mostrar overlay con estilo del juego
+  overlayGameOver.innerHTML = `
+    <h1 style="
+      color: #000; 
+      background-color: #ffd829; 
+      padding: 20px 40px; 
+      border-radius: 10px;
+      font-family: Garamond, serif;
+      text-align: center;
+      ">HAS PERDIDO</h1>
+    <button id="reiniciar-btn" style="
+      margin-top:30px;
+      padding:15px 30px;
+      font-size:30px;
+      font-family: Garamond, serif;
+      background-color: #ffd829;
+      color: #000;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      ">VOLVER A EMPEZAR</button>
+  `;
+  overlayGameOver.style.display = 'flex';
+
+  const btn = document.getElementById('reiniciar-btn');
+  btn.addEventListener('mouseenter', ()=> btn.style.backgroundColor = '#e6c520');
+  btn.addEventListener('mouseleave', ()=> btn.style.backgroundColor = '#ffd829');
+
+  btn.addEventListener('click', ()=>{
+    location.reload();
+  });
+}
+
+// =========================
 // GAME LOOP
+// =========================
 function gameLoop(){
-  controlesInvertidos = efectos.alcohol;
 
-  if(moveLeft){
-    offsetX = controlesInvertidos 
-      ? Math.max(offsetX-speed,-600)
-      : Math.min(offsetX+speed,0);
-  }
-  if(moveRight){
-    offsetX = controlesInvertidos
-      ? Math.min(offsetX+speed,0)
-      : Math.max(offsetX-speed,-600);
-  }
+  if(gameOver) return;
 
+  // MOVIMIENTO CARRETERA
+  if(moveLeft) offsetX = Math.min(offsetX + speed, 0);
+  if(moveRight) offsetX = Math.max(offsetX - speed, -600);
   carretera.style.transform = `translateX(${offsetX}px)`;
   carretera.classList.toggle('blur', efectos.alcohol);
 
   if(efectos.fumar) crearHumo();
 
+  // MOVER OBSTÁCULO
+  obstaculoY += 4; // velocidad vertical
+
+  if(obstaculoY > contenedor.offsetHeight){
+    obstaculoY = contenedor.offsetHeight * 0.33;
+    obstaculoX = Math.random()*(contenedor.offsetWidth-80);
+  }
+
+  // Ajuste horizontal según offsetX
+  obstaculo.style.left = obstaculoX + offsetX + "px";
+  obstaculo.style.top = obstaculoY + "px";
+
+  // ESCALA CONFORME SE ACERCA
+  let maxScale = 3;
+  let minScale = 0.1;
+  let progreso = (obstaculoY - contenedor.offsetHeight * 0.33) / (contenedor.offsetHeight - contenedor.offsetHeight * 0.33);
+  let scale = minScale + Math.pow(progreso, 0.5) * (maxScale - minScale); 
+  if(scale > maxScale) scale = maxScale;
+  obstaculo.style.transform = `scale(${scale})`;
+
+  // COLISIÓN
+  if(checkCollision(cocheHitbox, obstaculo)){
+    perder();
+  }
+
   requestAnimationFrame(gameLoop);
 }
+
 requestAnimationFrame(gameLoop);

@@ -1,11 +1,370 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Informacion</title>
-</head>
-<body>
-    
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Proyecto RACC · Carrera contra la distracción</title>
+    <link rel="stylesheet" href="styles-info.css" />
+  </head>
+  <body>
+    <div class="bg-road"></div>
+    <div class="bg-lines"></div>
+
+    <div class="container">
+      <a href="../pantalla.carga/index-pantalla.html" class="btn-home"
+        >🏠 Inicio</a
+      >
+      <header class="hero">
+        <div class="hero-card">
+          <div class="badge">🚗 PROYECTO RACC · Seguridad vial gamificada</div>
+          <h1>Carrera contra la distracción</h1>
+          <p>
+            Un proyecto de videojuego educativo centrado en la conducción
+            responsable. El jugador controla un coche y debe evitar
+            distracciones mientras mantiene la visibilidad y el control del
+            vehículo para no atropellar a peatones u obstáculos.
+          </p>
+
+          <nav class="quick-nav">
+            <a href="#resumen">Resumen</a>
+            <a href="#fondo">Fondo animado</a>
+            <a href="#imagenes">Imágenes</a>
+            <a href="#efectos">Efectos</a>
+            <a href="#obstaculos">Obstáculos</a>
+          </nav>
+        </div>
+      </header>
+
+      <section id="resumen">
+        <div class="section-card">
+          <h2 class="section-title">Resumen del proyecto</h2>
+          <p class="lead">
+            <strong>Carrera contra la distracción</strong> es un juego en el que
+            el conductor sufre distintas distracciones durante la conducción.
+            Cada vez que utiliza una distracción, empeora su capacidad de
+            reacción, el control del vehículo o la visibilidad de la carretera.
+            El objetivo principal es
+            <strong>esquivar o frenar a tiempo</strong> para no atropellar a
+            nadie.
+          </p>
+
+          <div class="info-grid">
+            <div class="mini-card">
+              <h3>🎯 Objetivo principal</h3>
+              <p>
+                Concienciar sobre los peligros de la distracción al volante
+                mediante una experiencia interactiva y visual.
+              </p>
+            </div>
+            <div class="mini-card">
+              <h3>🕹️ Mecánica base</h3>
+              <p>
+                Movimiento lateral del coche, reducción de control/visión al
+                distraerse y reacción ante obstáculos.
+              </p>
+            </div>
+            <div class="mini-card">
+              <h3>📌 Partes pendientes</h3>
+              <p>
+                Pasar información a Markdown en una pestaña ya creada y resolver
+                la hitbox del sistema de obstáculos.
+              </p>
+            </div>
+            <div class="mini-card">
+              <h3>🏁 Enfoque visual</h3>
+              <p>
+                Diseño propio con bocetos, digitalización, IA para mejora
+                gráfica y estética inspirada en RACC.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="fondo">
+        <div class="section-card">
+          <h2 class="section-title">Fondo animado</h2>
+          <p class="lead">
+            Esta parte constituye la base visual del proyecto. Fue una de las
+            secciones más complejas porque había muchas ideas para simular una
+            carretera en movimiento sin depender de herramientas externas como
+            Unity.
+          </p>
+
+          <div class="accordion">
+            <details open>
+              <summary>💡 Ideas iniciales y decisiones</summary>
+              <div class="details-body">
+                <ul>
+                  <li>
+                    Uso de Unity para crear el escenario (descartado por
+                    limitaciones de permisos en los equipos).
+                  </li>
+                  <li>Crear un GIF animado de la carretera (descartado).</li>
+                  <li>Modelado 3D de la carretera (descartado).</li>
+                  <li>
+                    Imagen estática de fondo (considerada demasiado simple).
+                  </li>
+                  <li>
+                    <strong
+                      >Carrusel de imágenes en movimiento (solución
+                      elegida).</strong
+                    >
+                  </li>
+                </ul>
+              </div>
+            </details>
+
+            <details>
+              <summary>🛣️ Cómo funciona el carrusel de carretera</summary>
+              <div class="details-body">
+                El carrusel se compone de <strong>4 imágenes base</strong> de
+                una carretera con pequeñas variaciones, colocadas una detrás de
+                otra para generar una sensación de avance. Encima se añade un
+                borde con el interior del coche dibujado por el equipo para que
+                el jugador sienta que está conduciendo desde dentro del
+                vehículo.
+              </div>
+            </details>
+          </div>
+
+          <div class="photo-strip">
+            <div class="photo">
+              Imagen base del primer fondo<br /><small
+                >(pon aquí la foto real)</small
+              >
+            </div>
+            <div class="photo">
+              Versión mejorada con IA<br /><small>(sustituir por imagen)</small>
+            </div>
+            <div class="photo">
+              Carrusel de 4 carreteras<br /><small
+                >(añadir las 4 capturas)</small
+              >
+            </div>
+            <div class="photo">
+              Interior del coche<br /><small>(añadir diseño final)</small>
+            </div>
+          </div>
+
+          <div class="timeline">
+            <div class="step">
+              <div class="step-number">1</div>
+              <div>
+                <strong>Boceto a mano</strong><br />
+                Se diseñó una carretera base y el interior del coche sobre papel
+                para definir composición y perspectiva.
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-number">2</div>
+              <div>
+                <strong>Digitalización</strong><br />
+                Los bocetos se pasaron a formato digital y se limpiaron las
+                líneas para preparar una versión más usable dentro del juego.
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-number">3</div>
+              <div>
+                <strong>Mejora con IA</strong><br />
+                Se usó IA para mejorar nitidez, calidad visual y coherencia
+                entre elementos del fondo y del coche.
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-number">4</div>
+              <div>
+                <strong>Montaje final</strong><br />
+                Se colocaron 4 imágenes consecutivas para simular movimiento y
+                se superpuso el interior del coche como marco inmersivo.
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="imagenes">
+        <div class="section-card">
+          <h2 class="section-title">Imágenes y recursos visuales</h2>
+          <p class="lead">
+            Todas las imágenes del proyecto siguen un proceso común: boceto
+            manual, conversión a digital con herramientas como Paint o IbisPaint
+            y mejora posterior con IA para conseguir un resultado más
+            profesional.
+          </p>
+
+          <div class="tabs">
+            <div class="tab-buttons">
+              <button class="tab-btn active" data-tab="tab1">
+                Proceso creativo
+              </button>
+              <button class="tab-btn" data-tab="tab2">Iconos y recortes</button>
+              <button class="tab-btn" data-tab="tab3">Galería preparada</button>
+            </div>
+
+            <div class="tab-panel active" id="tab1">
+              <p>
+                El flujo de trabajo visual parte de un dibujo hecho a mano,
+                después se digitaliza y finalmente se pule con IA para corregir
+                proporciones, dar mejor acabado y unificar el estilo del
+                proyecto.
+              </p>
+            </div>
+
+            <div class="tab-panel" id="tab2">
+              <p>
+                Para los iconos y elementos sueltos, se eliminó el fondo con
+                <strong>remove.bg</strong>, facilitando su integración dentro de
+                la interfaz del juego y mejorando la limpieza visual general.
+              </p>
+            </div>
+
+            <div class="tab-panel" id="tab3">
+              <p>
+                Esta sección está preparada para que insertes todas las fotos
+                del proceso: bocetos, versiones en Paint/IbisPaint, mejoras con
+                IA y recursos finales listos para el juego.
+              </p>
+            </div>
+          </div>
+
+          <div class="photo-strip">
+            <div class="photo">
+              Boceto inicial<br /><small>Insertar imagen</small>
+            </div>
+            <div class="photo">
+              Versión digital Paint / IbisPaint<br /><small
+                >Insertar imagen</small
+              >
+            </div>
+            <div class="photo">
+              Mejora con IA<br /><small>Insertar imagen</small>
+            </div>
+            <div class="photo">
+              Iconos sin fondo (remove.bg)<br /><small>Insertar imagen</small>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="efectos">
+        <div class="section-card">
+          <h2 class="section-title">Efectos (preparado para completar)</h2>
+          <p class="lead">
+            Esta parte sigue en proceso, así que la página queda preparada para
+            añadir más adelante los efectos visuales, de sonido o de feedback
+            del jugador.
+          </p>
+
+          <div class="placeholder-box">
+            ✨ Aquí podrás añadir después:
+            <ul>
+              <li>
+                Efectos al distraerse (desenfoque, vibración, reducción de
+                visibilidad).
+              </li>
+              <li>Efectos al frenar o esquivar obstáculos.</li>
+              <li>Sonidos de impacto, bocina, frenado o avisos visuales.</li>
+              <li>Feedback visual al perder control del vehículo.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section id="obstaculos">
+        <div class="section-card">
+          <h2 class="section-title">Obstáculos y sistema de hitbox</h2>
+          <p class="lead">
+            El objetivo del juego es esquivar obstáculos moviendo el coche de
+            izquierda a derecha con las flechas del teclado. Esta parte es una
+            de las pendientes principales, especialmente por la implementación
+            de la <strong>hitbox</strong>
+            necesaria para detectar colisiones de forma justa.
+          </p>
+
+          <div class="accordion">
+            <details open>
+              <summary>👵 Obstáculo principal: la abuela</summary>
+              <div class="details-body">
+                Se diseñó un personaje principal como obstáculo:
+                <strong>la abuela</strong>. Primero se hizo un boceto en papel,
+                luego se pasó a Paint, se coloreó y se intentó mejorar con IA.
+                Sin embargo, el resultado generado por IA no convencía
+                visualmente, así que se mantuvo una versión más fiel al diseño
+                original.
+              </div>
+            </details>
+
+            <details>
+              <summary>📦 Idea de hitbox y funcionamiento</summary>
+              <div class="details-body">
+                En el boceto del sistema, los
+                <strong>círculos representan los obstáculos</strong> que
+                aparecen en la carretera. La hitbox del coche se plantea como un
+                <strong>rectángulo inferior</strong> que ocupa casi todo el
+                ancho del coche, dejando un pequeño margen lateral para que el
+                jugador pueda esquivar con precisión sin que el choque sea
+                inevitable.
+              </div>
+            </details>
+          </div>
+
+          <div class="info-grid">
+            <div class="mini-card">
+              <h3>⌨️ Control</h3>
+              <p>
+                Movimiento lateral con flechas izquierda/derecha para evitar
+                impactos.
+              </p>
+            </div>
+            <div class="mini-card">
+              <h3>⚠️ Detección de colisión</h3>
+              <p>
+                La hitbox debe ser ajustada para no ocupar todo el sprite y
+                permitir esquives realistas.
+              </p>
+            </div>
+            <div class="mini-card">
+              <h3>🧠 Recomendación técnica</h3>
+              <p>
+                Usar una hitbox rectangular más pequeña que el sprite visual,
+                centrada en la parte baja del coche.
+              </p>
+            </div>
+            <div class="mini-card">
+              <h3>📋 Estado</h3>
+              <p>Sección pendiente de implementación final dentro del juego.</p>
+            </div>
+          </div>
+
+          <div class="photo-strip">
+            <div class="photo">
+              Proceso de creación de la abuela<br /><small
+                >Insertar secuencia de imágenes</small
+              >
+            </div>
+            <div class="photo">
+              Versión final del obstáculo<br /><small>Insertar imagen</small>
+            </div>
+            <div class="photo">
+              Boceto del sistema de obstáculos<br /><small
+                >Insertar esquema</small
+              >
+            </div>
+            <div class="photo">
+              Diagrama de hitbox del coche<br /><small>Insertar dibujo</small>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <footer>
+        Página temática inspirada en RACC · Diseño HTML + CSS con desplegables,
+        pestañas y zonas preparadas para insertar imágenes reales.
+      </footer>
+    </div>
+
+    <script src="script-info.js"></script>
+  </body>
 </html>

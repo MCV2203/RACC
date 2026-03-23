@@ -1,3 +1,6 @@
+/* =========================
+   BODY Y CONTENEDOR PRINCIPAL
+   ========================= */
 body {
   margin: 0;
   padding: 0;
@@ -10,6 +13,9 @@ body {
   overflow: hidden;
 }
 
+/* =========================
+   HEADER DEL JUEGO
+   ========================= */
 .top-bar {
   width: 100%;
   height: 100px;
@@ -17,34 +23,79 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 20px;
+  padding: 0 40px; /* separación interna */
   box-sizing: border-box;
+  font-family: Garamond, serif; /* tipografía del header */
+}
+
+.top-bar .logo img {
+  height: 80px; /* tamaño del logo */
+  width: auto;  /* mantener proporción */
 }
 
 .top-bar .iconos {
   display: flex;
-  gap: 40px;
-  justify-content: flex-start;
-  flex: 1;
+  gap: 40px; /* separación entre los iconos */
 }
 
 .top-bar .iconos .icon {
   text-decoration: none;
-  font-size: 24px;
-  color: #000;
+  font-size: 24px; /* tamaño de letra */
+  color: #000;     /* color de texto */
   cursor: pointer;
 }
 
-.top-bar .logo img {
-  height: 80px;
-  width: auto;
+/* =========================
+   PANEL IZQUIERDO
+   ========================= */
+.panel-cuadrados {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.cuadro {
+  width: 60px;
+  height: 60px;
+  background-color: #ffd829;
+  border: 5px solid #ffffff;
+  border-radius: 5px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  user-select: none;
+  overflow: hidden;
+  transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+
+.cuadro img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  pointer-events: none;
+}
+
+.cuadro:hover {
+  background-color: #ffec66;
+}
+
+/* =========================
+   CARRETERA Y COCHE
+   ========================= */
+.main-container {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 20px;
 }
 
 .carretera-container {
   position: relative;
   width: 1200px;
   height: 750px;
-  margin-top: 20px;
   border-radius: 10px;
   overflow: hidden;
 }
@@ -80,48 +131,9 @@ body {
   pointer-events: none;
 }
 
-.main-container {
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-  gap: 20px;
-  margin-top: 20px;
-}
-
-.panel-cuadrados {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
-.cuadro {
-  width: 60px;
-  height: 60px;
-  background-color: #ffd829;
-  border: 5px solid #ffffff;
-  border-radius: 5px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: bold;
-  user-select: none;
-  overflow: hidden;
-  transition: border-color 0.3s ease;
-}
-
-.cuadro img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  pointer-events: none;
-}
-
-.cuadro:hover {
-  background-color: #ffec66;
-}
-
-/* Efectos visuales */
+/* =========================
+   EFECTOS VISUALES
+   ========================= */
 .carretera.blur {
   filter: blur(7px);
 }
@@ -130,7 +142,6 @@ body {
   filter: blur(4px) brightness(150%) contrast(190%);
 }
 
-/* Humo */
 .humo-nube {
   position: absolute;
   width: 70px;
@@ -145,16 +156,19 @@ body {
   0%,100% { opacity: 0; }
   50% { opacity: 1; }
 }
+
 .carretera.sueno::after {
-  content:"";
-  position:absolute;
-  top:0; left:0;
-  width:100%; height:100%;
-  background-color:black;
-  opacity:0;
-  pointer-events:none;
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  opacity: 0;
+  pointer-events: none;
   animation: parpadeo 1.5s 2;
-  z-index:20;
+  z-index: 20;
 }
 
 /* =========================

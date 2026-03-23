@@ -19,6 +19,7 @@ body {
   height: 100px;
   background-color: #ffd829;
   display: flex;
+  font-family: Garamond, serif;
   justify-content: space-between;
   align-items: center;
   padding: 0 20px;
@@ -36,6 +37,7 @@ body {
 }
 .top-bar .logo img {
   height: 80px;
+  margin-right: 1300px;
 }
 
 /* CONTENEDOR PRINCIPAL */
@@ -236,4 +238,27 @@ body {
   text-align: center;
   flex-direction: column;
   gap: 10px;
+}
+
+/* =========================
+   OBSTÁCULO
+   ========================= */
+.obstaculo {
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  background-image: url("images/abuela.png"); /* Cambia la imagen aquí */
+  background-size: cover;
+  background-position: center;
+  top: -100px;
+  left: 400px;
+  z-index: 8;
+}
+
+/* HITBOX DEL COCHE (invisible) */
+#coche-hitbox {
+  position: absolute;
+  z-index: 12;
+  pointer-events: none;
+  /* border: 1px solid red; /* descomenta para debug */
 }
